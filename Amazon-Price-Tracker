@@ -10,8 +10,16 @@ import smtplib, ssl
 print("hello")
 
 
-url = r"https://www.amazon.co.uk/VicTsing-Keyboard-Wired%E3%80%90Comfortable-Durable%E3%80%91-Responsive-Black/dp/B07NQH2423/ref=sr_1_4?crid=1RBS7CP7RUJS8&keywords=keyboard&qid=1579085192&sprefix=keybo%2Caps%2C150&sr=8-4"
+# url = r"https://www.amazon.co.uk/VicTsing-Keyboard-Wired%E3%80%90Comfortable-Durable%E3%80%91-Responsive-Black/dp/B07NQH2423/ref=sr_1_4?crid=1RBS7CP7RUJS8&keywords=keyboard&qid=1579085192&sprefix=keybo%2Caps%2C150&sr=8-4"
+# url of the item
 
+# user-defined price
+desire_price = 13
+
+# sender_email = 
+# google mail 2nd level security level password may be used
+# sender_psw =
+# receiver_email =
 
 headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36"
@@ -30,7 +38,7 @@ def check_price():
 
     print(converted_price)
 
-    if converted_price < 13:
+    if converted_price < desire_price:
         print("goint to send")
         send_email()
 
@@ -44,13 +52,13 @@ def send_email():
     server.starttls(context=context)
     server.ehlo()
 
-    server.login("vicpeng86@gmail.com", "kaudgehuacuyiqhg")
+    server.login(sender_email, sender_psw)
 
-    subject = "keyboard is now less than 13 pounds!"
+    subject = "Item price is dropped!"
     body = "check link " + url
     msg = f"subject: {subject} \n\n{body}"
 
-    server.sendmail("vicpeng86@gmail.com", "victorpeng86@outlook.com", msg)
+    server.sendmail(sender_email, receiver_email, msg)
 
     print("done")
 
